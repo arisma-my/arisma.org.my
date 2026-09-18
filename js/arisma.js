@@ -169,3 +169,45 @@
   });
 
 })();
+/* ============================================================
+   MUNCUL PERLAHAN SEMASA SKROL
+   Tampal blok ini di HUJUNG fail js/arisma.js, iaitu SELEPAS
+   baris terakhir yang berbunyi:   })();
+   ============================================================ */
+(function(){
+  "use strict";
+
+  // Jika pengunjung meminta gerakan minimum, jangan buat apa-apa.
+  if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if(!("IntersectionObserver" in window)) return;
+
+  // Pilih elemen yang patut muncul perlahan.
+  var pilih = [
+    ".sec-head", ".prog", ".aut", ".fact", ".give",
+    ".person", ".gal figure", ".contact", ".vm-block",
+    ".form-card", ".agro", ".hero-shot", ".xlink-row", ".creds"
+  ].join(",");
+
+  var item = document.querySelectorAll(pilih);
+  if(!item.length) return;
+
+  // Tandakan dokumen supaya CSS tahu JS hidup.
+  document.documentElement.classList.add("reveal-on");
+
+  Array.prototype.forEach.call(item, function(el, i){
+    el.classList.add("reveal");
+    // Sedikit lengah berturutan supaya kad tidak muncul serentak.
+    el.style.transitionDelay = (Math.min(i % 6, 5) * 70) + "ms";
+  });
+
+  var pemerhati = new IntersectionObserver(function(masuk){
+    masuk.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add("seen");
+        pemerhati.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+
+  Array.prototype.forEach.call(item, function(el){ pemerhati.observe(el); });
+})();
