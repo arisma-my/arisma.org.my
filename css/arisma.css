@@ -350,3 +350,71 @@ footer{padding-block:36px 44px;border-top:1px solid var(--line)}
 .xlink-row h2{font-size:clamp(1.6rem,2.8vw,2.1rem);margin-top:12px}
 .xlink-row .lead{margin-top:12px}
 @media (max-width: 760px){.xlink-row{grid-template-columns:1fr;justify-items:start}}
+
+/* ============================================================
+   LAPISAN KEMASAN — tampal blok ini di HUJUNG fail arisma.css
+   Jangan padam apa-apa di atas. Blok ini cuma menindih
+   beberapa nilai sedia ada.
+   ============================================================ */
+
+/* ---- 1. Ruang lebih lapang antara bahagian ---- */
+section{padding-block:clamp(88px,12vw,180px)}
+.hero{padding-block:clamp(56px,9vw,120px) clamp(72px,10vw,140px)}
+.sec-head{gap:18px;margin-bottom:clamp(44px,6vw,80px);max-width:52ch}
+
+/* ---- 2. Tajuk lebih besar dan lebih bernafas ---- */
+.hero h1{font-size:clamp(2.6rem,6vw,5rem);letter-spacing:-.02em;line-height:1.02}
+h2{font-size:clamp(2.1rem,4.4vw,3.4rem);letter-spacing:-.015em;line-height:1.08}
+.lead{font-size:clamp(1.15rem,1.6vw,1.3rem);line-height:1.65}
+.eyebrow{font-size:.72rem;letter-spacing:.16em}
+
+/* ---- 3. Butang lebih berisi ---- */
+.btn{padding:.95em 1.6em;font-size:1.02rem;transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s ease,background .25s ease}
+.btn-primary{box-shadow:0 1px 2px rgba(28,46,31,.08)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(45,106,52,.45)}
+.btn-ghost:hover{transform:translateY(-2px)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(122,132,20,.4)}
+
+/* ---- 4. Kad: bayang halus dan angkat sedikit bila dihala ---- */
+.prog,.contact,.form-card,.path{
+  transition:transform .3s cubic-bezier(.2,.7,.3,1),box-shadow .3s ease,border-color .3s ease;
+  box-shadow:0 1px 2px rgba(28,46,31,.04);
+}
+.prog:hover,a.contact:hover{transform:translateY(-4px);box-shadow:0 18px 40px -20px rgba(28,46,31,.3);border-color:var(--teal)}
+.prog{padding:32px}
+.contact{padding:26px}
+
+/* ---- 5. Gambar galeri: zum perlahan bila dihala ---- */
+.gal figure{overflow:hidden}
+.gal img,.pf img,.hero-shot img{transition:transform .7s cubic-bezier(.2,.7,.3,1)}
+.gal figure:hover img{transform:scale(1.045)}
+.gal{gap:16px}
+
+/* ---- 6. Hero: gambar lebih besar dan lebih rapat ke tepi ---- */
+.hero-shot .frame{aspect-ratio:2/1;border-radius:26px;box-shadow:0 30px 70px -40px rgba(28,46,31,.5)}
+@media (max-width:700px){.hero-shot .frame{aspect-ratio:4/3;border-radius:18px}}
+
+/* ---- 7. Navigasi: garis halus di bawah pautan ---- */
+.nav a{position:relative;transition:color .2s ease}
+.nav a::after{
+  content:"";position:absolute;left:.55em;right:.55em;bottom:.28em;height:2px;
+  background:var(--teal);transform:scaleX(0);transform-origin:left;
+  transition:transform .28s cubic-bezier(.2,.7,.3,1);
+}
+.nav a:hover{background:transparent;color:var(--teal)}
+.nav a:hover::after{transform:scaleX(1)}
+@media (max-width:1180px){.nav a::after{display:none}.nav a:hover{background:var(--surface-2)}}
+
+/* ---- 8. Muncul perlahan semasa skrol ---- */
+/* Elemen disembunyikan hanya jika JS hidup (kelas .reveal-on ditambah
+   oleh skrip). Tanpa JS, semuanya kekal kelihatan seperti biasa. */
+.reveal-on .reveal{opacity:0;transform:translateY(22px);
+  transition:opacity .75s cubic-bezier(.2,.7,.3,1),transform .75s cubic-bezier(.2,.7,.3,1)}
+.reveal-on .reveal.seen{opacity:1;transform:none}
+
+/* Hormati tetapan "kurangkan gerakan" pada peranti pengunjung */
+@media (prefers-reduced-motion: reduce){
+  .reveal-on .reveal{opacity:1!important;transform:none!important}
+  .gal figure:hover img{transform:none}
+  .btn:hover,.prog:hover,a.contact:hover{transform:none}
+}
