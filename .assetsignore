@@ -1,0 +1,6 @@
+.assetsignore
+wrangler.jsonc
+BACA-SAYA.md
+api/
+apps-script/
+src/
