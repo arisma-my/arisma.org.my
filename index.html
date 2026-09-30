@@ -142,16 +142,19 @@ p{margin:0}
 .pause{width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(255,255,255,.6);background:transparent;color:#fff;cursor:pointer;display:grid;place-items:center}
 .pause svg{width:14px;height:14px}
 @media (max-width:760px){
-  /* Telefon: tajuk lebih kecil, butang kecil sebelah-menyebelah, "Kenali kami" jadi pautan teks */
+  /* Telefon: tajuk lebih kecil, tiga butang sebaris */
   .slide img{object-position:var(--pos-m,var(--pos,50% 50%))}
   .hero h1{font-size:clamp(2rem,9vw,2.6rem)}
   .hero-sub{font-size:.95rem;margin-top:12px}
   .hero-foot{flex-direction:column;align-items:stretch;gap:20px;margin-top:24px}
-  .hero-actions{flex-direction:row;gap:10px}
-  .hero-actions .btn{flex:1 1 0;min-width:0;width:auto;padding:13px 16px;font-size:1rem}
-  .hero-actions .btn-kaca{flex:1 1 100%;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:4px 0;text-decoration:underline;text-underline-offset:4px;font-size:.98rem}
+  .hero-actions{flex-direction:row;flex-wrap:nowrap;gap:8px}
+  .hero-actions .btn{flex:1 1 0;min-width:0;width:auto;padding:13px 6px;font-size:.92rem;white-space:nowrap;justify-content:center;text-align:center}
   .hero-ctrl{justify-content:space-between;flex-wrap:wrap;row-gap:6px}
   .hero-cap{text-align:left;flex:1 1 100%}
+}
+@media (max-width:350px){
+  .hero-actions{gap:6px}
+  .hero-actions .btn{font-size:.8rem;padding:13px 4px}
 }
 }
 @media (prefers-reduced-motion:reduce){.slide{transition:none}.slide.on img,.slide.out img{animation:none}.hero-inner>*{animation:none;opacity:1;transform:none}.ev-head,.grid button{animation:none;opacity:1;transform:none}.path::before{transition:none}.path li .n{transition:none}.reveal,.reveal-stagger>*{transition:none;opacity:1;transform:none}}
