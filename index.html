@@ -115,7 +115,7 @@ p{margin:0}
 .slides{position:absolute;inset:0;margin:0;padding:0;list-style:none}
 .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.9s cubic-bezier(.4,0,.2,1)}
 .slide.on{opacity:1;z-index:1}
-.slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.05)}
+.slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);object-position:var(--pos,50% 50%)}
 .slide.on img,.slide.out img{animation:zum 10s cubic-bezier(.25,.1,.25,1) forwards}
 @keyframes zum{0%{transform:scale(1.05) translate3d(0,0,0)}100%{transform:scale(1.17) translate3d(-1.6%,-1%,0)}}
 .hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -142,11 +142,17 @@ p{margin:0}
 .pause{width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(255,255,255,.6);background:transparent;color:#fff;cursor:pointer;display:grid;place-items:center}
 .pause svg{width:14px;height:14px}
 @media (max-width:760px){
-  .hero-foot{flex-direction:column;align-items:stretch}
-  .hero-actions{flex-direction:column}
-  .hero-actions .btn{width:100%}
-  .hero-ctrl{justify-content:space-between}
-  .hero-cap{text-align:left}
+  /* Telefon: tajuk lebih kecil, butang kecil sebelah-menyebelah, "Kenali kami" jadi pautan teks */
+  .slide img{object-position:var(--pos-m,var(--pos,50% 50%))}
+  .hero h1{font-size:clamp(2rem,9vw,2.6rem)}
+  .hero-sub{font-size:.95rem;margin-top:12px}
+  .hero-foot{flex-direction:column;align-items:stretch;gap:20px;margin-top:24px}
+  .hero-actions{flex-direction:row;gap:10px}
+  .hero-actions .btn{flex:1 1 0;min-width:0;width:auto;padding:13px 16px;font-size:1rem}
+  .hero-actions .btn-kaca{flex:1 1 100%;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:4px 0;text-decoration:underline;text-underline-offset:4px;font-size:.98rem}
+  .hero-ctrl{justify-content:space-between;flex-wrap:wrap;row-gap:6px}
+  .hero-cap{text-align:left;flex:1 1 100%}
+}
 }
 @media (prefers-reduced-motion:reduce){.slide{transition:none}.slide.on img,.slide.out img{animation:none}.hero-inner>*{animation:none;opacity:1;transform:none}.ev-head,.grid button{animation:none;opacity:1;transform:none}.path::before{transition:none}.path li .n{transition:none}.reveal,.reveal-stagger>*{transition:none;opacity:1;transform:none}}
 
@@ -242,7 +248,7 @@ p{margin:0}
 }
 @media (max-width:560px){.bento{grid-template-columns:1fr}.tile.big,.tile.wide{grid-column:auto}}
 
-/* ---------- 5. Kedai ---------- */
+/* ---------- 5. Kiosk ---------- */
 .shop{background:#FFF8DC}
 .shelf{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .item.utama{grid-column:span 2}
@@ -386,7 +392,7 @@ p{margin:0}
       <a href="#tentang">Tentang</a>
       <a href="#program">Program</a>
       <a href="#perusahaan">Perusahaan</a>
-      <a href="#kedai">Kedai</a>
+      <a href="#kedai">Kiosk</a>
       <a href="#desa">Desa</a>
       <a href="#galeri">Galeri</a>
       <a href="#daftar">Daftar</a>
@@ -404,13 +410,13 @@ p{margin:0}
 <!-- ===================== 1. LANDING ===================== -->
 <section class="hero" aria-label="Pengenalan">
   <ul class="slides" id="slides">
-    <li class="slide on" data-cap="Bakeri ARISMA"><img src="img/CWYB_3.jpg" alt="Pelatih berapron Bake with Love ketawa sambil melambai di dapur akademi." fetchpriority="high" style="object-position:60% 40%"></li>
-    <li class="slide" data-cap="Aktiviti luar"><img src="img/luar_2.jpg" alt="Pelatih dan guru tersenyum berswafoto di sebelah van." loading="lazy" style="object-position:50% 45%"></li>
-    <li class="slide" data-cap="Bubur Lambuk bersama YB, Mac 2025"><img src="img/Bubur_Lambuk_YB_4.jpg" alt="Pelatih berjersi ARISMA bergambar bersama tetamu di hadapan latar akademi." loading="lazy"></li>
-    <li class="slide" data-cap="Sambutan Maulidur Rasul"><img src="img/maulid_1.jpg" alt="Pelatih tersenyum dan bergaya bersama guru di hadapan latar ARISMA." loading="lazy" style="object-position:45% 55%"></li>
-    <li class="slide" data-cap="Coffee with YB"><img src="img/CWYB_1.jpg" alt="Pelatih berbaju hijau membuat isyarat hati bersama tetamu." loading="lazy" style="object-position:50% 30%"></li>
-    <li class="slide" data-cap="Kunjungan Tengku Zafrul Aziz"><img src="img/TZ_3.jpg" alt="Tengku Zafrul bersama wakil ARISMA dan tetamu di khemah produk." loading="lazy" style="object-position:50% 30%"></li>
-    <li class="slide" data-cap="Kunjungan Tengku Zafrul Aziz"><img src="img/TZ_1.jpg" alt="Tetamu, tenaga pengajar dan pelatih bergambar beramai-ramai di hadapan latar ARISMA." loading="lazy" style="object-position:50% 35%"></li>
+    <li class="slide on" data-cap="Bakeri ARISMA"><img src="img/CWYB_3.jpg" alt="Pelatih berapron Bake with Love ketawa sambil melambai di dapur akademi." fetchpriority="high" style="--pos:60% 40%;--pos-m:72% 40%"></li>
+    <li class="slide" data-cap="Aktiviti luar"><img src="img/luar_2.jpg" alt="Pelatih dan guru tersenyum berswafoto di sebelah van." loading="lazy" style="--pos:50% 45%;--pos-m:46% 45%"></li>
+    <li class="slide" data-cap="Bubur Lambuk bersama YB, Mac 2025"><img src="img/Bubur_Lambuk_YB_4.jpg" alt="Pelatih berjersi ARISMA bergambar bersama tetamu di hadapan latar akademi." loading="lazy" style="--pos:50% 50%;--pos-m:50% 55%"></li>
+    <li class="slide" data-cap="Sambutan Maulidur Rasul"><img src="img/maulid_1.jpg" alt="Pelatih tersenyum dan bergaya bersama guru di hadapan latar ARISMA." loading="lazy" style="--pos:45% 55%;--pos-m:56% 55%"></li>
+    <li class="slide" data-cap="Coffee with YB"><img src="img/CWYB_1.jpg" alt="Pelatih berbaju hijau membuat isyarat hati bersama tetamu." loading="lazy" style="--pos:50% 30%;--pos-m:42% 30%"></li>
+    <li class="slide" data-cap="Kunjungan Tengku Zafrul Aziz"><img src="img/TZ_3.jpg" alt="Tengku Zafrul bersama wakil ARISMA dan tetamu di khemah produk." loading="lazy" style="--pos:50% 30%;--pos-m:42% 30%"></li>
+    <li class="slide" data-cap="Kunjungan Tengku Zafrul Aziz"><img src="img/TZ_1.jpg" alt="Tetamu, tenaga pengajar dan pelatih bergambar beramai-ramai di hadapan latar ARISMA." loading="lazy" style="--pos:50% 35%;--pos-m:45% 35%"></li>
   </ul>
   <div class="wrap hero-inner">
     <h1>Membina kehidupan remaja autisme yang berdikari dan bermaruah.</h1>
@@ -459,6 +465,13 @@ p{margin:0}
       </div>
       <div class="people reveal-stagger" id="pengajarList">
         <article class="person"><div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><b>Encik Farouq</b><span>Penyelia Guru</span></article>
+        <article class="person"><div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><b>Puan Saadah</b><span>Penyelia Guru</span></article>
+        <article class="person"><div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><b>Encik Azri</b><span>Guru</span></article>
+        <article class="person"><div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><b>Encik Naim</b><span>Guru</span></article>
+        <article class="person"><div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><b>Puan Amira</b><span>Guru</span></article>
+        <article class="person"><div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><b>Puan Ros</b><span>Guru</span></article>
+        <article class="person"><div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><b>Puan Dira</b><span>Guru</span></article>
+        <article class="person"><div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><b>Cik Afiqah</b><span>Guru</span></article>
       </div>
     </div>
 
@@ -492,9 +505,9 @@ p{margin:0}
       <article class="prog"><p class="label">Keagamaan</p><div><h3>Pembinaan rohani</h3><p>Solat, bacaan dan adab dalam jadual harian.</p></div></article>
     </div>
     <dl class="facts reveal-stagger">
-      <div class="fact" data-isi hidden><dt>Umur</dt><dd id="f-umur"><span class="isi">[isi: julat umur]</span></dd></div>
-      <div class="fact" data-isi hidden><dt>Waktu</dt><dd id="f-waktu"><span class="isi">[isi: hari &amp; waktu]</span></dd></div>
-      <div class="fact" data-isi hidden><dt>Yuran</dt><dd id="f-yuran"><span class="isi">[isi: yuran bulanan]</span></dd></div>
+      <div class="fact"><dt>Umur</dt><dd id="f-umur">17 tahun ke atas</dd></div>
+      <div class="fact"><dt>Waktu</dt><dd id="f-waktu">Isnin hingga Jumaat, 8.30 am - 4.30 pm</dd></div>
+      <div class="fact"><dt>Yuran</dt><dd id="f-yuran">Kadar dikenakan mengikut pakej</dd></div>
     </dl>
   </div>
 </section>
@@ -509,7 +522,7 @@ p{margin:0}
     <div class="bento reveal-stagger">
       <article class="tile foto big">
         <img src="img/CWYB_3.jpg" alt="Pelatih berapron di dapur bakeri ARISMA." loading="lazy" style="object-position:70% 40%">
-        <div><h3>Bakeri</h3><p>Roti, biskut dan pastri dari dapur akademi, dijual di Kedai ARISMA.</p></div>
+        <div><h3>Bakeri</h3><p>Roti, biskut dan pastri dari dapur akademi, dijual di Kiosk ARISMA.</p></div>
       </article>
       <article class="tile foto wide">
         <img src="img/ANGKASA_1.jpg" alt="Menara hidroponik dengan sayur daun di Taman Agro ARISMA." loading="lazy" style="object-position:20% 30%">
@@ -527,11 +540,11 @@ p{margin:0}
   </div>
 </section>
 
-<!-- ===================== 5. KEDAI ARISMA ===================== -->
+<!-- ===================== 5. KIOSK ARISMA ===================== -->
 <section class="sec shop" id="kedai">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2>Kedai ARISMA</h2>
+      <h2>Kiosk ARISMA</h2>
       <p class="lead">Dibuat di dapur akademi bersama pelatih. Pilih, kemudian pesan terus melalui WhatsApp.</p>
     </div>
     <div class="shelf reveal-stagger" id="shelf"></div>
@@ -591,20 +604,20 @@ p{margin:0}
 <section class="give" id="sumbang" aria-labelledby="sumbangT">
   <div class="wrap">
     <div class="reveal">
-      <h2 id="sumbangT">Bantu bina Desa ARISMA.</h2>
-      <p class="lead">Setiap sumbangan membawa pelatih kita lebih dekat kepada tempat untuk hidup berdikari, sepanjang hayat.</p>
+      <h2 id="sumbangT">Bersama menyokong komuniti autisme.</h2>
+      <p class="lead">Sumbangan anda kepada Yayasan ARISMA menyokong pendidikan, latihan kemahiran dan kesedaran untuk golongan autisme, supaya mereka dapat hidup lebih berdikari.</p>
     </div>
     <div class="meter reveal" id="meterBuka" hidden>
       <p class="amt" id="amt">RM 0</p>
       <p class="of">terkumpul daripada sasaran <span id="target">RM 2,000,000</span></p>
-      <div class="bar" role="progressbar" aria-label="Kutipan Desa ARISMA" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><i id="barFill"></i></div>
+      <div class="bar" role="progressbar" aria-label="Kutipan Yayasan ARISMA" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><i id="barFill"></i></div>
       <div class="meta"><span id="pct">0%</span><span id="donors"></span></div>
       <a class="btn btn-kuning" id="giveBtn" href="#" target="_blank" rel="noopener">Sumbang melalui toyyibPay</a>
       <p class="fine">Sumbangan diterima oleh Yayasan ARISMA (PPAB-29/2014). Anda boleh masukkan jumlah sendiri di halaman toyyibPay.</p>
     </div>
     <div class="meter reveal" id="meterTutup">
       <p class="amt" id="targetTutup">RM 2,000,000</p>
-      <p class="of">sasaran pembinaan Desa ARISMA</p>
+      <p class="of">sasaran kutipan Yayasan ARISMA</p>
       <p class="soon">Kutipan dalam talian akan dibuka tidak lama lagi.</p>
       <a class="btn btn-putih" href="https://www.facebook.com/arisma2013" target="_blank" rel="noopener">Ikuti perkembangan di Facebook</a>
     </div>
@@ -849,7 +862,7 @@ p{margin:0}
     </div>
     <div class="foot-bottom">
       <p>© <span id="yr">2026</span> ARISMA, dikendalikan oleh WIBARISMA Sdn. Bhd. (201001043903 / 927831-W)</p>
-      <p>Sumbangan Desa ARISMA diurus oleh Yayasan ARISMA (PPAB-29/2014).</p>
+      <p>Sumbangan dalam talian diurus oleh Yayasan ARISMA (PPAB-29/2014).</p>
     </div>
   </div>
 </footer>
@@ -869,11 +882,11 @@ p{margin:0}
    TETAPAN — ubah di sini sahaja
    ========================================================= */
 var ARISMA = {
-  whatsapp: "60122290403",                 // semua borang & pesanan kedai pergi ke nombor ini
+  whatsapp: "60122290403",                 // semua borang & pesanan kiosk pergi ke nombor ini
   // Nilai di bawah ialah SANDARAN. Bila Google Sheet disambung (lihat BACA-SAYA.md), nilai dari Sheet mengatasinya.
   desa: {
     buka: false,                           // false = kutipan dalam talian belum dibuka; tukar ke true bila toyyibPay sedia
-    sasaran: 2000000,                      // RM
+    sasaran: 2000000,                      // RM, sandaran sahaja. Nilai sebenar dari Sheet (Tetapan > sasaran_desa)
     terkumpul: 0,                          // angka sandaran jika /api/desa tidak dapat dibaca
     api: "/api/desa",                      // Cloudflare Worker (src/index.js)
     toyyibpay: "https://toyyibpay.com/ISI-KOD-BIL"  // pautan bil toyyibPay Yayasan (jumlah terbuka)
@@ -1003,7 +1016,7 @@ var ARISMA = {
   }
   renderPelatih();
 
-  /* ---------- 5. Kedai ---------- */
+  /* ---------- 5. Kiosk ---------- */
   var qty = {}, shelf = $("shelf"), sum = $("orderSum"), orderBtn = $("orderBtn");
   function chosen(){ return ARISMA.produk.filter(function(p){ return qty[p.id] > 0; }); }
   function renderCart(){
@@ -1041,7 +1054,7 @@ var ARISMA = {
   });
   orderBtn.addEventListener("click", function(){
     var lines = chosen().map(function(p){ return "- " + p.nama + " x " + qty[p.id]; });
-    openWA("Assalamualaikum, saya ingin memesan dari Kedai ARISMA:\n" + lines.join("\n") + "\n\nNama:\nCara ambil / alamat penghantaran:");
+    openWA("Assalamualaikum, saya ingin memesan dari Kiosk ARISMA:\n" + lines.join("\n") + "\n\nNama:\nCara ambil / alamat penghantaran:");
   });
 
   /* ---------- 6. Kutipan Desa ---------- */
@@ -1188,7 +1201,7 @@ var ARISMA = {
     });
     if(pl.length){ ARISMA.pelatih = pl; renderPelatih(); }
 
-    // Produk Kedai
+    // Produk Kiosk
     var pr = (k.produk || []).filter(function(r){ return nilai(r.nama); });
     if(pr.length){
       var dipakai = {};
@@ -1223,13 +1236,12 @@ var ARISMA = {
     }
   }
   (function(){
-    var ctl = window.AbortController ? new AbortController() : null;
-    var tm = ctl ? setTimeout(function(){ ctl.abort(); }, 8000) : null;
-    fetch("/api/kandungan", ctl ? {signal: ctl.signal} : {})
+    // Had masa 8 saat. Guna Promise.race (bukan AbortController) supaya tidak gagal dalam pratonton tertentu.
+    var tamat = new Promise(function(_, tolak){ setTimeout(function(){ tolak(new Error("tamat masa")); }, 8000); });
+    Promise.race([fetch("/api/kandungan"), tamat])
       .then(function(r){ if(!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
       .then(function(k){ if(k && k.ok) terapkan(k); })
-      .catch(function(e){ if(window.console) console.warn("Kandungan Google Sheet tidak dimuat; guna kandungan asal.", e); })
-      .then(function(){ if(tm) clearTimeout(tm); });
+      .catch(function(e){ if(window.console) console.warn("Kandungan Google Sheet tidak dimuat; guna kandungan asal.", e); });
   })();
 
   /* ---------- Muncul satu-satu bila sampai skrin (semua seksyen) ---------- */
