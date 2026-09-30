@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ARISMA · Akademi Remaja Islam Autisma</title>
 <meta name="description" content="Akademi di Ukay Perdana, Ampang yang membimbing remaja autisme melalui kemahiran kendiri, latihan vokasional dan pembinaan rohani.">
+<link rel="canonical" href="https://arisma.org.my/">
+<meta name="theme-color" content="#0D3A2C">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ms_MY">
+<meta property="og:site_name" content="ARISMA">
+<meta property="og:title" content="ARISMA · Akademi Remaja Islam Autisma">
+<meta property="og:description" content="Akademi di Ukay Perdana, Ampang yang membimbing remaja autisme melalui kemahiran kendiri, latihan vokasional dan pembinaan rohani.">
+<meta property="og:url" content="https://arisma.org.my/">
+<meta property="og:image" content="https://arisma.org.my/img/CWYB_3.jpg">
+<meta property="og:image:width" content="1456">
+<meta property="og:image:height" content="840">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@500;600;700&family=Inter:wght@500;600&family=Atkinson+Hyperlegible+Next:wght@400;500;700&display=swap">
@@ -43,6 +55,10 @@ a{color:inherit}
 :focus-visible{outline:3px solid var(--kuning);outline-offset:3px;border-radius:6px}
 .wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+.skip{position:absolute;left:12px;top:-64px;z-index:100;background:var(--kuning);color:var(--ink);font-family:var(--f-head);font-weight:600;padding:12px 18px;border-radius:999px;text-decoration:none;transition:top .15s ease}
+.skip:focus{top:12px}
+.price .tanya{font-size:.95rem;font-weight:500;color:var(--muted)}
 .isi{background:#FFF1B8;color:#6B5200;border-bottom:1.5px dashed #C9A200;padding:0 .3em;border-radius:4px;font-weight:500}
 
 /* ---------- Tipografi ---------- */
@@ -100,7 +116,7 @@ p{margin:0}
 .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.9s cubic-bezier(.4,0,.2,1)}
 .slide.on{opacity:1;z-index:1}
 .slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.05)}
-.slide.on img{animation:zum 10s cubic-bezier(.25,.1,.25,1) forwards}
+.slide.on img,.slide.out img{animation:zum 10s cubic-bezier(.25,.1,.25,1) forwards}
 @keyframes zum{0%{transform:scale(1.05) translate3d(0,0,0)}100%{transform:scale(1.17) translate3d(-1.6%,-1%,0)}}
 .hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(180deg,rgba(9,40,30,.55) 0%,rgba(9,40,30,.1) 22%,rgba(9,40,30,.2) 48%,rgba(9,40,30,.88) 100%)}
@@ -132,7 +148,7 @@ p{margin:0}
   .hero-ctrl{justify-content:space-between}
   .hero-cap{text-align:left}
 }
-@media (prefers-reduced-motion:reduce){.slide{transition:none}.slide.on img{animation:none}.hero-inner>*{animation:none;opacity:1;transform:none}.ev-head,.grid button{animation:none;opacity:1;transform:none}.path::before{transition:none}.path li .n{transition:none}.reveal,.reveal-stagger>*{transition:none;opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.slide{transition:none}.slide.on img,.slide.out img{animation:none}.hero-inner>*{animation:none;opacity:1;transform:none}.ev-head,.grid button{animation:none;opacity:1;transform:none}.path::before{transition:none}.path li .n{transition:none}.reveal,.reveal-stagger>*{transition:none;opacity:1;transform:none}}
 
 /* ---------- Muncul satu-satu bila sampai skrin ---------- */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.16,.84,.3,1),transform .7s cubic-bezier(.16,.84,.3,1)}
@@ -357,6 +373,7 @@ p{margin:0}
 </style>
 </head>
 <body>
+<a class="skip" href="#utama">Langkau ke kandungan</a>
 
 <!-- ===================== HEADER ===================== -->
 <header class="head" id="head">
@@ -438,17 +455,14 @@ p{margin:0}
     <div class="team" id="pengajar">
       <div class="team-head">
         <h3>Tenaga pengajar</h3>
-        <p class="note" id="pengajarNota"><span class="isi">[isi: bilangan tenaga pengajar]</span></p>
+        <p class="note" id="pengajarNota" data-isi hidden><span class="isi">[isi: bilangan tenaga pengajar]</span></p>
       </div>
       <div class="people reveal-stagger" id="pengajarList">
-        <article class="person"><div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><b>Encik Farouq</b><span>Pembantu Guru</span></article>
-        <article class="person"><div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><b><span class="isi">[isi: nama]</span></b><span><span class="isi">[isi: jawatan]</span></span></article>
-        <article class="person"><div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><b><span class="isi">[isi: nama]</span></b><span><span class="isi">[isi: jawatan]</span></span></article>
-        <article class="person"><div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><b><span class="isi">[isi: nama]</span></b><span><span class="isi">[isi: jawatan]</span></span></article>
+        <article class="person"><div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><b>Encik Farouq</b><span>Penyelia Guru</span></article>
       </div>
     </div>
 
-    <div class="team" id="pelatih">
+    <div class="team" id="pelatih" hidden>
       <div class="team-head">
         <h3>Pelatih</h3>
         <p class="note">Gambar dan nama dipaparkan dengan kebenaran keluarga.</p>
@@ -478,9 +492,9 @@ p{margin:0}
       <article class="prog"><p class="label">Keagamaan</p><div><h3>Pembinaan rohani</h3><p>Solat, bacaan dan adab dalam jadual harian.</p></div></article>
     </div>
     <dl class="facts reveal-stagger">
-      <div class="fact"><dt>Umur</dt><dd id="f-umur"><span class="isi">[isi: julat umur]</span></dd></div>
-      <div class="fact"><dt>Waktu</dt><dd id="f-waktu"><span class="isi">[isi: hari &amp; waktu]</span></dd></div>
-      <div class="fact"><dt>Yuran</dt><dd id="f-yuran"><span class="isi">[isi: yuran bulanan]</span></dd></div>
+      <div class="fact" data-isi hidden><dt>Umur</dt><dd id="f-umur"><span class="isi">[isi: julat umur]</span></dd></div>
+      <div class="fact" data-isi hidden><dt>Waktu</dt><dd id="f-waktu"><span class="isi">[isi: hari &amp; waktu]</span></dd></div>
+      <div class="fact" data-isi hidden><dt>Yuran</dt><dd id="f-yuran"><span class="isi">[isi: yuran bulanan]</span></dd></div>
     </dl>
   </div>
 </section>
@@ -659,7 +673,7 @@ p{margin:0}
     </div>
 
     <div class="ev" role="tabpanel" id="p-mr" aria-labelledby="t-mr">
-      <div class="ev-head"><h3>Sambutan Maulidur Rasul</h3><p><span class="isi">[isi: tarikh]</span></p></div>
+      <div class="ev-head"><h3>Sambutan Maulidur Rasul</h3><p data-isi hidden><span class="isi">[isi: tarikh]</span></p></div>
       <div class="grid">
         <button type="button"><img src="img/maulid_1.jpg" alt="Pelatih dan guru bergaya ceria di hadapan latar ARISMA." loading="lazy" width="1036" height="784"></button>
         <button type="button"><img src="img/maulid_2.jpg" alt="Kain rentang Selamat Menyambut Maulidur Rasul yang dilukis bersama." loading="lazy" width="784" height="1036"></button>
@@ -734,7 +748,7 @@ p{margin:0}
     </div>
 
     <div class="ev" role="tabpanel" id="p-tz" aria-labelledby="t-tz" hidden>
-      <div class="ev-head"><h3>Kunjungan YM Datuk Seri Utama Tengku Zafrul Aziz</h3><p><span class="isi">[isi: tarikh]</span></p></div>
+      <div class="ev-head"><h3>Kunjungan YM Datuk Seri Utama Tengku Zafrul Aziz</h3><p data-isi hidden><span class="isi">[isi: tarikh]</span></p></div>
       <div class="grid">
         <button type="button"><img src="img/TZ_1.jpg" alt="Tetamu, tenaga pengajar dan pelatih bergambar beramai-ramai di hadapan latar ARISMA." loading="lazy" width="1372" height="896"></button>
         <button type="button"><img src="img/TZ_2.jpg" alt="Tengku Zafrul berucap kepada warga ARISMA di hadapan pintu akademi." loading="lazy" width="1372" height="896"></button>
@@ -745,7 +759,7 @@ p{margin:0}
     </div>
 
     <div class="ev" role="tabpanel" id="p-cw" aria-labelledby="t-cw" hidden>
-      <div class="ev-head"><h3>Coffee with YB</h3><p><span class="isi">[isi: tarikh]</span></p></div>
+      <div class="ev-head"><h3>Coffee with YB</h3><p data-isi hidden><span class="isi">[isi: tarikh]</span></p></div>
       <div class="grid">
         <button type="button"><img src="img/CWYB_3.jpg" alt="Pelatih berapron Bake with Love melambai di dapur akademi." loading="lazy" width="1456" height="840"></button>
         <button type="button"><img src="img/CWYB_1.jpg" alt="Pelatih dan tetamu membuat isyarat hati di hadapan latar ARISMA." loading="lazy" width="1568" height="728"></button>
@@ -825,7 +839,7 @@ p{margin:0}
       <div>
         <h3>Hubungi</h3>
         <a class="contact" href="https://wa.me/60122290403" target="_blank" rel="noopener"><b>Puan Siti Khadijah</b><span>Pengasas, 012-229 0403</span></a>
-        <a class="contact" href="https://wa.me/60122098440" target="_blank" rel="noopener"><b>Encik Farouq</b><span>Pembantu Guru, 012-209 8440</span></a>
+        <a class="contact" href="https://wa.me/60122098440" target="_blank" rel="noopener"><b>Encik Farouq</b><span>Penyelia Guru, 012-209 8440</span></a>
       </div>
       <div>
         <h3>Ikuti kami</h3>
@@ -861,7 +875,7 @@ var ARISMA = {
     buka: false,                           // false = kutipan dalam talian belum dibuka; tukar ke true bila toyyibPay sedia
     sasaran: 2000000,                      // RM
     terkumpul: 0,                          // angka sandaran jika /api/desa tidak dapat dibaca
-    api: "/api/desa",                      // Vercel Function (api/desa.js)
+    api: "/api/desa",                      // Cloudflare Worker (src/index.js)
     toyyibpay: "https://toyyibpay.com/ISI-KOD-BIL"  // pautan bil toyyibPay Yayasan (jumlah terbuka)
   },
   produk: [                                // harga: null = belum diisi; gambar: kosongkan untuk label warna
@@ -873,8 +887,7 @@ var ARISMA = {
     {id:"jus",     nama:"Jus Nanas",             ket:"Perahan segar.",                  harga:null, gambar:"img/produk_jus.jpg", posisi:"50% 85%", warna:"#FFE27A"},
     {id:"kacang",  nama:"Kacang",                ket:"Kudapan klasik untuk tetamu.",    harga:null, warna:"#C99562"}
   ],
-  pelatih: [                               // tambah {nama:"...", gambar:"img/..."} bila ada kebenaran keluarga
-    {}, {}, {}, {}, {}, {}
+  pelatih: [                               // kosong = bahagian Pelatih disorok. Isi di tab Pelatih (Sheet) bila ada kebenaran keluarga
   ]
 };
 
@@ -882,6 +895,12 @@ var ARISMA = {
   "use strict";
   var $ = function(id){ return document.getElementById(id); };
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Tambah ?semak pada alamat (arisma.org.my/?semak) untuk nampak semua ruang [isi: ...] yang belum diisi.
+  // Pengunjung biasa tidak nampaknya: bahagian kosong disorok sehingga Sheet diisi.
+  var semak = /[?&]semak\b/.test(location.search);
+  if(semak) [].forEach.call(document.querySelectorAll("[data-isi]"), function(e){ e.hidden = false; });
+  function segarFakta(){ var dl = document.querySelector(".facts"); if(dl) dl.hidden = !dl.querySelector(".fact:not([hidden])"); }
+  segarFakta();
   function openWA(text){ window.open("https://wa.me/" + ARISMA.whatsapp + "?text=" + encodeURIComponent(text), "_blank", "noopener"); }
   function rm(n){ return "RM " + Math.round(n).toLocaleString("en-MY"); }
   // Harga produk: kekalkan sen (RM 7.50), tanpa sen bila bulat (RM 18)
@@ -921,11 +940,21 @@ var ARISMA = {
     dots.appendChild(b);
   });
   function go(i){
-    slides[cur].classList.remove("on");
+    var prev = slides[cur];
+    prev.classList.remove("on");
     cur = (i + slides.length) % slides.length;
-    var img = slides[cur].querySelector("img"); img.loading = "eager";
-    slides[cur].classList.add("on");
-    cap.textContent = slides[cur].dataset.cap || "";
+    var now = slides[cur];
+    // slaid yang keluar terus "zum" semasa pudar, supaya gambar tidak melompat ke saiz asal
+    if(prev !== now){
+      prev.classList.add("out"); clearTimeout(prev._t);
+      prev._t = setTimeout(function(){ prev.classList.remove("out"); }, 2100);
+    }
+    clearTimeout(now._t); now.classList.remove("out");
+    now.querySelector("img").loading = "eager";
+    now.classList.add("on");
+    // muat turun gambar seterusnya lebih awal supaya sudah sedia bila giliran tiba
+    slides[(cur + 1) % slides.length].querySelector("img").loading = "eager";
+    cap.textContent = now.dataset.cap || "";
     [].forEach.call(dots.children, function(d, j){ d.setAttribute("aria-current", j === cur ? "true" : "false"); });
   }
   function restart(){ clearInterval(timer); if(playing) timer = setInterval(function(){ go(cur + 1); }, 6500); }
@@ -963,7 +992,10 @@ var ARISMA = {
   /* ---------- 2. Pelatih ---------- */
   var person = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>';
   function renderPelatih(){
-    $("trainees").innerHTML = ARISMA.pelatih.map(function(p){
+    var ada = ARISMA.pelatih.filter(function(p){ return p && p.nama; });
+    var senarai = ada.length ? ada : (semak ? [{}, {}, {}, {}, {}, {}] : []);
+    $("pelatih").hidden = !senarai.length;
+    $("trainees").innerHTML = senarai.map(function(p){
       var pf = p.gambar ? '<img src="' + esc(p.gambar) + '" alt="' + esc(p.nama) + ', pelatih ARISMA" loading="lazy" style="width:100%;height:100%;object-fit:cover">' : person;
       var nm = p.nama ? esc(p.nama) : '<span class="isi">[isi: nama]</span>';
       return '<article class="person"><div class="pf">' + pf + '</div><b>' + nm + '</b></article>';
@@ -992,7 +1024,7 @@ var ARISMA = {
         : '<div class="pack" style="background:' + esc(p.warna) + '" aria-hidden="true"><div class="sticker"><div><small>arisma</small><span>' + esc(p.nama) + '</span></div></div></div>';
       el.innerHTML = visual +
         '<h3>' + esc(p.nama) + '</h3><p class="desc">' + esc(p.ket) + '</p>' +
-        '<div class="item-foot"><p class="price">' + (p.harga != null ? rmHarga(p.harga) : 'RM <span class="isi">[isi]</span>') + '</p>' +
+        '<div class="item-foot"><p class="price">' + (p.harga != null ? rmHarga(p.harga) : (semak ? 'RM <span class="isi">[isi]</span>' : '<span class="tanya">Tanya harga di WhatsApp</span>')) + '</p>' +
         '<div class="qty" role="group" aria-label="Kuantiti ' + esc(p.nama) + '">' +
           '<button type="button" data-id="' + esc(p.id) + '" data-d="-1" aria-label="Kurangkan ' + esc(p.nama) + '">−</button>' +
           '<output id="q-' + esc(p.id) + '">' + qty[p.id] + '</output>' +
@@ -1128,9 +1160,10 @@ var ARISMA = {
 
     // Fakta program & bilangan pengajar
     [["f-umur","umur"],["f-waktu","waktu"],["f-yuran","yuran"]].forEach(function(x){
-      if(nilai(t[x[1]])) $(x[0]).textContent = nilai(t[x[1]]);
+      if(nilai(t[x[1]])){ $(x[0]).textContent = nilai(t[x[1]]); $(x[0]).parentNode.hidden = false; }
     });
-    if(nilai(t.bilangan_pengajar)) $("pengajarNota").textContent = nilai(t.bilangan_pengajar);
+    segarFakta();
+    if(nilai(t.bilangan_pengajar)){ $("pengajarNota").textContent = nilai(t.bilangan_pengajar); $("pengajarNota").hidden = false; }
 
     // Desa
     var s = nombor(t.sasaran_desa); if(s) d.sasaran = s;
@@ -1178,7 +1211,7 @@ var ARISMA = {
       if(nilai(r.tab)) $("t-" + id).textContent = nilai(r.tab);
       var h = panel.querySelector(".ev-head h3"), p = panel.querySelector(".ev-head p");
       if(h && nilai(r.tajuk)) h.textContent = nilai(r.tajuk);
-      if(p && nilai(r.tarikh_papar)) p.textContent = nilai(r.tarikh_papar);
+      if(p && nilai(r.tarikh_papar)){ p.textContent = nilai(r.tarikh_papar); p.hidden = false; }
     });
     var bertarikh = ac.filter(function(r){ return /^\d{4}-\d{2}-\d{2}$/.test(nilai(r.tarikh_iso)); });
     if(bertarikh.length){
