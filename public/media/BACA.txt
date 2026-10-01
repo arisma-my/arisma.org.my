@@ -1,0 +1,3 @@
+Letak video logo di sini:
+  intro.mp4  (16:9, latar hitam, H.264)
+  poster.jpg (bingkai terakhir video)
