@@ -2,6 +2,11 @@
   "name": "arisma-website",
   "main": "src/index.js",
   "compatibility_date": "2026-09-30",
+  // Matikan alamat *.workers.dev pengeluaran supaya tiada kandungan pendua.
+  "workers_dev": false,
+  // MESTI ditulis eksplisit: jika tidak, nilainya mengikut workers_dev (false)
+  // dan pratonton PR turut mati. Jangan tukar ke false tanpa tanya.
+  "preview_urls": true,
   "assets": {
     "directory": "./",
     "binding": "ASSETS",
