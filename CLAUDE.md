@@ -14,13 +14,13 @@ Laman satu halaman untuk Akademi Remaja Islam Autisma. Entiti berasingan daripad
 
 ## Seni bina ringkas
 - `index.html`: seluruh laman (CSS + JS dalam satu fail). Nilai asal ialah sandaran; nilai Google Sheet mengatasinya bagi ruang yang diisi.
-- `src/index.js`: Worker Cloudflare untuk `/api/*`. Selain itu, fail statik dihidang terus.
+- `src/index.js`: Worker Cloudflare, hanya `/api/kandungan`. Selain itu, fail statik dihidang terus.
 - `apps-script/Code.gs`: kod Google Sheet. Ditampal dalam Sheet, TIDAK dihidang.
 - `img/`: gambar. `_headers`: pengepala keselamatan dan cache. `robots.txt`, `sitemap.xml`: SEO.
 
 ## Peraturan
 - Sheet menang atas `index.html` untuk perkara dalam senarai `BACA-SAYA.md`. Jangan ubah di dua tempat.
-- Jangan letak rahsia, kunci, token atau data peribadi dalam repo. Pembolehubah rahsia (`APPS_SCRIPT_URL`, `KUNCI_SKRIP`, dll.) ditetapkan di Cloudflare sahaja.
+- Jangan letak rahsia, kunci, token atau data peribadi dalam repo. Pembolehubah rahsia (`APPS_SCRIPT_URL`) ditetapkan di Cloudflare sahaja.
 - Fail yang TIDAK dihidang disenaraikan dalam `.assetsignore`. Fail dalaman baharu (nota, skrip) mesti ditambah di situ.
 - `wrangler.jsonc`: `workers_dev: false` dan `preview_urls: true` dipasangkan dengan sengaja. `preview_urls` mesti kekal `true` supaya PR boleh dipratonton. Jangan tukar ke `false` tanpa bertanya pengguna.
 - `wrangler.jsonc`: blok `"previews": {}` mesti kekal (walaupun kosong) kerana Workers Builds guna `wrangler preview` (beta) untuk branch bukan-main dan akan gagal tanpanya.
@@ -34,7 +34,6 @@ Laman satu halaman untuk Akademi Remaja Islam Autisma. Entiti berasingan daripad
 - Akademi dikendalikan oleh WIBARISMA Sdn. Bhd. (201001043903 / 927831-W).
 - Yayasan ARISMA (PPAB-29/2014), iaitu ARISMA Foundation, hanya sebagai penerima sumbangan. Sumbangan dibuat di arismafoundation.org.my/sumbang/.
 
-## Perkara tertunggak
-- Buang sepenuhnya Desa ARISMA, toyyibPay, `api/` (sisa Vercel) dan tab Sheet "Penderma".
-- Semua butang Sumbang menuju `https://arismafoundation.org.my/sumbang/`.
-- Semak sama ada WIBARISMA dinyatakan sebagai pengendali dan Yayasan sebagai penerima sumbangan dalam footer.
+## Sumbangan
+- Semua butang Sumbang menuju `https://arismafoundation.org.my/sumbang/`. Akademi tidak mengutip, merekod atau memaparkan jumlah sumbangan, dan tidak menyimpan data penderma.
+- Desa ARISMA dan toyyibPay sudah dibuang. Jangan perkenalkan semula tanpa arahan pengguna.

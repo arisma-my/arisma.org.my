@@ -7,24 +7,18 @@
  * Kemudian ikut langkah dalam BACA-SAYA.md.
  *
  * Prinsip keselamatan:
- *  - doGet HANYA memulangkan tab awam (senarai TAB_AWAM). Tab "Penderma" tidak pernah keluar.
- *  - doPost hanya terima permintaan yang membawa KUNCI rahsia (disimpan dalam Script Properties).
+ *  - doGet HANYA memulangkan tab awam (senarai TAB_AWAM). Tab lain tidak pernah keluar.
+ *  - Tiada doPost: Sheet ini tidak menerima data daripada luar.
  *  - Pelatih hanya keluar jika lajur "kebenaran" = ya.
  */
 
 var TAB_AWAM = ['Tetapan', 'Produk', 'Pengajar', 'Pelatih', 'Acara'];
-var TAB_PENDERMA = 'Penderma';
-var LAJUR_PENDERMA = ['No. rujukan', 'Tarikh bayaran', 'Nama', 'Emel', 'Telefon', 'Jumlah (RM)', 'Bil', 'Dicatat pada'];
 
 /* ================= Sediakan Sheet (jalankan SEKALI) ================= */
 function sediakanSheet() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
 
   buatTab_(ss, 'Tetapan', ['Kunci', 'Nilai', 'Penerangan'], [
-    ['sasaran_desa', '2000000', 'Sasaran kutipan Desa ARISMA (RM)'],
-    ['kutipan_luar', '0', 'Kutipan di luar toyyibPay (tunai / bank), ditambah pada jumlah dalam talian (RM)'],
-    ['buka_desa', 'tidak', 'ya = papar butang sumbang dan bar progress. tidak = "akan dibuka tidak lama lagi"'],
-    ['pautan_toyyibpay', '', 'Pautan bil toyyibPay Desa (mesti bermula https://toyyibpay.com/)'],
     ['umur', '', 'Julat umur pelatih'],
     ['waktu', '', 'Hari dan waktu program'],
     ['yuran', '', 'Yuran bulanan'],
@@ -60,22 +54,8 @@ function sediakanSheet() {
     ['ag', 'Taman Agro', '', '10 November 2018', '']
   ]);
 
-  buatTab_(ss, TAB_PENDERMA, LAJUR_PENDERMA, []);
-
   var pertama = ss.getSheetByName('Sheet1') || ss.getSheetByName('Sheet 1');
   if (pertama && ss.getSheets().length > 1 && pertama.getLastRow() === 0) ss.deleteSheet(pertama);
-}
-
-/* ================= Jana kunci rahsia (jalankan SEKALI) ================= */
-function tetapkanKunci() {
-  var props = PropertiesService.getScriptProperties();
-  if (props.getProperty('KUNCI')) {
-    Logger.log('Kunci sudah wujud. Untuk menukar, padam "KUNCI" dalam Project Settings > Script Properties.');
-    return;
-  }
-  var kunci = Utilities.getUuid().replace(/-/g, '') + Utilities.getUuid().replace(/-/g, '');
-  props.setProperty('KUNCI', kunci);
-  Logger.log('KUNCI_SKRIP = ' + kunci);
 }
 
 /* ================= GET: kandungan awam ================= */
@@ -107,61 +87,6 @@ function doGet() {
   hasil.acara = bacaBaris_(ss, 'Acara');
 
   return json_(hasil);
-}
-
-/* ================= POST: catat penderma (dari Vercel sahaja) ================= */
-function doPost(e) {
-  var body;
-  try {
-    body = JSON.parse(e.postData.contents);
-  } catch (err) {
-    return json_({ ok: false, sebab: 'bentuk data salah' });
-  }
-
-  var kunci = PropertiesService.getScriptProperties().getProperty('KUNCI');
-  if (!kunci || body.kunci !== kunci) {
-    return json_({ ok: false, sebab: 'tidak dibenarkan' });
-  }
-  if (body.tindakan !== 'penderma' || !Array.isArray(body.baris)) {
-    return json_({ ok: false, sebab: 'tindakan tidak dikenali' });
-  }
-
-  var lock = LockService.getScriptLock();
-  lock.waitLock(20000);
-  try {
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
-    var sheet = ss.getSheetByName(TAB_PENDERMA);
-    if (!sheet) {
-      sheet = ss.insertSheet(TAB_PENDERMA);
-      sheet.appendRow(LAJUR_PENDERMA);
-      sheet.setFrozenRows(1);
-    }
-
-    // Kunci unik: no. rujukan; jika kosong, gabungan bil + tarikh + nama + jumlah.
-    var ada = {};
-    var data = sheet.getDataRange().getValues();
-    for (var i = 1; i < data.length; i++) {
-      ada[kunciBaris_(data[i][0], data[i][6], data[i][1], data[i][2], data[i][5])] = true;
-    }
-
-    var baru = 0;
-    var sekarang = new Date().toISOString();
-    body.baris.forEach(function (b) {
-      var k = kunciBaris_(b.rujukan, b.bil, b.tarikh, b.nama, b.jumlah);
-      if (ada[k]) return;
-      ada[k] = true;
-      // Awalan ' supaya Sheets tidak tafsir teks sebagai formula (cth. nama bermula =).
-      sheet.appendRow([
-        selamat_(b.rujukan), selamat_(b.tarikh), selamat_(b.nama), selamat_(b.emel),
-        selamat_(b.telefon), Number(b.jumlah) || 0, selamat_(b.bil), sekarang
-      ]);
-      baru++;
-    });
-
-    return json_({ ok: true, baru: baru, diterima: body.baris.length });
-  } finally {
-    lock.releaseLock();
-  }
 }
 
 /* ================= Bantuan ================= */
@@ -197,17 +122,6 @@ function bacaBaris_(ss, nama) {
 
 function ya_(v) {
   return /^(ya|yes|y|true|1)$/i.test(String(v == null ? '' : v).trim());
-}
-
-function kunciBaris_(rujukan, bil, tarikh, nama, jumlah) {
-  var r = String(rujukan == null ? '' : rujukan).trim();
-  if (r) return 'r:' + r;
-  return ['g', bil, tarikh, nama, Number(jumlah) || 0].join('|');
-}
-
-function selamat_(v) {
-  var t = String(v == null ? '' : v);
-  return /^[=+\-@]/.test(t) ? "'" + t : t;
 }
 
 function json_(obj) {
