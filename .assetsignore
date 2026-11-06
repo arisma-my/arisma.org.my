@@ -1,6 +1,8 @@
 .assetsignore
 wrangler.jsonc
 BACA-SAYA.md
+CLAUDE.md
 api/
 apps-script/
 src/
+.git/
