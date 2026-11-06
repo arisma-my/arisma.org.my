@@ -1,18 +1,21 @@
 # ARISMA — laman web (satu halaman)
 
-Kemas kini terakhir: 30 September 2026. Laman ini dihoskan di **Cloudflare** (Worker `arisma-website`), bukan Vercel.
+Kemas kini terakhir: 6 November 2026. Laman ini dihoskan di **Cloudflare** (Worker `arisma-website`), bukan Vercel.
+
+Laman ini ialah laman **Akademi**. Sumbangan dibuat di laman ARISMA Foundation (`arismafoundation.org.my/sumbang/`), bukan di sini.
 
 ## Isi repo
 | Fail / folder        | Fungsi |
 |----------------------|--------|
 | `index.html`         | Seluruh laman (gaya + skrip dalam satu fail) |
 | `img/`               | Gambar acara, produk dan logo |
-| `src/index.js`       | Worker Cloudflare: melayan `/api/kandungan`, `/api/desa`, `/api/toyyibpay`. Selain itu, fail statik dihidang terus |
-| `wrangler.jsonc`     | Arahan kepada Cloudflare: nama Worker, fail Worker, folder statik |
-| `.assetsignore`      | Fail yang TIDAK dihidang kepada pengunjung (kod `api/`, `src/`, `apps-script/`, nota ini) |
-| `_headers`           | Tetapan keselamatan pelayar (nosniff, Referrer-Policy, X-Frame-Options, Permissions-Policy) |
+| `src/index.js`       | Worker Cloudflare: melayan `/api/kandungan` sahaja. Selain itu, fail statik dihidang terus |
+| `wrangler.jsonc`     | Arahan kepada Cloudflare: nama Worker, fail Worker, folder statik, tetapan pratonton |
+| `.assetsignore`      | Fail yang TIDAK dihidang kepada pengunjung (kod `src/`, `apps-script/`, nota ini, `CLAUDE.md`, `.git/`) |
+| `_headers`           | Pengepala keselamatan pelayar dan cache gambar |
+| `robots.txt`, `sitemap.xml` | Untuk enjin carian |
+| `CLAUDE.md`          | Peraturan kerja untuk Claude Code (aliran PR dan peraturan repo) |
 | `apps-script/Code.gs`| "Otak" Google Sheet. Ditampal dalam Sheet, BUKAN dimuat naik ke hosting |
-| `api/*.js`           | Versi lama untuk Vercel. Tidak digunakan lagi; boleh dipadam bila Vercel sudah ditutup |
 
 Setiap kali fail di repo GitHub berubah (branch `main`), Cloudflare membina dan menyiarkan semula secara automatik. Ambil masa seminit dua.
 
@@ -21,12 +24,11 @@ Ubah di Sheet "ARISMA Website", laman ikut dalam ~2 minit. Tiada kod perlu disen
 
 | Tab Sheet | Mengawal | Awam? |
 |-----------|----------|-------|
-| Tetapan   | sasaran kutipan (kunci `sasaran_desa`), kutipan luar, suis buka kutipan (`buka_desa`), pautan toyyibPay, umur, waktu, yuran, bilangan pengajar | ya |
+| Tetapan   | umur, waktu, yuran, bilangan pengajar | ya |
 | Produk    | nama, keterangan, harga, gambar, warna (Kiosk) | ya |
 | Pengajar  | nama, jawatan, gambar; hanya baris `papar = ya` keluar | ya |
 | Pelatih   | nama, gambar; hanya baris `kebenaran = ya` keluar | ya |
 | Acara     | nama tab, tajuk, tarikh (`tarikh_papar`), susunan (`tarikh_iso`) | ya |
-| Penderma  | direkod automatik. TIDAK PERNAH dihantar ke laman | TIDAK |
 
 ### Sheet atau index.html? Yang mana menang?
 `index.html` mengandungi nilai **asal** (sandaran). Bila Sheet dapat dibaca, **nilai Sheet mengatasi nilai asal**, tetapi hanya untuk ruang yang anda isi. Ruang yang **kosong** di Sheet tidak memadam nilai asal.
@@ -36,19 +38,21 @@ Perkara yang hanya ada dalam `index.html` (tidak boleh diubah dari Sheet): teks 
 Peraturan penting:
 - Apa sahaja dalam tab awam boleh dilihat sesiapa yang buka laman. Jangan letak maklumat peribadi atau rahsia di situ.
 - `tarikh_iso` format 2026-08-26. Acara bertarikh disusun terbaru dahulu; yang kosong duduk selepasnya.
-- Gambar: `img/nama.jpg` (fail dalam folder `img`) atau pautan `https://...`. Gambar baharu masih perlu dimuat naik ke GitHub.
+- Gambar: `img/nama.jpg` (fail dalam folder `img`) atau pautan `https://...`. Gambar baharu masih perlu dimuat naik ke GitHub. Gambar dicache 7 hari, jadi bila mengganti gambar, guna nama fail baharu.
 - Jika Sheet tidak dapat dibaca, laman guna kandungan asal dalam `index.html`. Laman tidak akan rosak.
-- Butang sumbang hanya keluar jika `buka_desa = ya` DAN pautan bermula `https://toyyibpay.com/`.
 - Hanya orang yang dipercayai patut diberi akses EDIT kepada Sheet.
 
 ### Ruang kosong disorok
 Bahagian yang belum diisi (pelatih, umur/waktu/yuran, tarikh acara, bilangan pengajar) **tidak dipaparkan kepada pengunjung**. Harga produk yang kosong menunjukkan "Tanya harga di WhatsApp".
 Untuk melihat apa yang masih perlu diisi, buka `arisma.org.my/?semak`. Ruang kosong akan keluar berwarna kuning.
 
+## Sumbangan
+Semua butang **Sumbang** menuju terus ke `https://arismafoundation.org.my/sumbang/`. Sumbangan diterima oleh Yayasan ARISMA (PPAB-29/2014) melalui laman ARISMA Foundation. Laman Akademi tidak lagi mengutip, merekod atau memaparkan jumlah sumbangan, dan tiada data penderma disimpan di sini. Jika pautan Foundation berubah, ubah di `index.html` (cari `arismafoundation.org.my`).
+
 ## Cloudflare: di mana benda-benda
 - **Worker**: Cloudflare > Workers & Pages > `arisma-website`.
 - **Pembolehubah rahsia** (Settings > Variables and secrets, bahagian PALING ATAS, jenis Secret):
-  `APPS_SCRIPT_URL` (URL Web app Apps Script, berakhir `/exec`) dan `KUNCI_SKRIP` (kunci dalam Apps Script: Project Settings > Script Properties > `KUNCI`).
+  `APPS_SCRIPT_URL` (URL Web app Apps Script, berakhir `/exec`).
   Jangan isi di bahagian "Builds", kerana Worker tidak nampak nilai di situ.
 - **Domain**: `arisma.org.my` disambung ke Worker (tab Domains). `www.arisma.org.my` dialih ke `arisma.org.my` melalui Rules > Redirect Rules.
 - **DNS**: Cloudflare > Domains > `arisma.org.my` > DNS. Nameserver domain ditetapkan di iWHOST kepada `ace.ns.cloudflare.com` dan `nina.ns.cloudflare.com`. Hanya pemegang akaun iWHOST boleh menukarnya.
@@ -58,18 +62,17 @@ Untuk melihat apa yang masih perlu diisi, buka `arisma.org.my/?semak`. Ruang kos
 1. Google Drive > New > Google Sheets.
 2. Extensions > Apps Script. Padam kod asal, tampal seluruh `apps-script/Code.gs`, Save.
 3. Pilih fungsi `sediakanSheet` > Run. Beri kebenaran. Tab-tab tercipta dengan contoh data.
-4. Pilih fungsi `tetapkanKunci` > Run. Buka Execution log, salin `KUNCI_SKRIP = ...`.
-5. Deploy > New deployment > Web app. Execute as: Me. Who has access: Anyone. Salin URL (berakhir `/exec`).
+4. Deploy > New deployment > Web app. Execute as: Me. Who has access: Anyone. Salin URL (berakhir `/exec`).
    Jika ubah `Code.gs` kemudian: Deploy > Manage deployments > edit > New version.
-6. Masukkan `APPS_SCRIPT_URL` dan `KUNCI_SKRIP` di Cloudflare (lihat di atas). Selepas menyimpan, Worker dihantar semula automatik.
-7. Uji: buka `arisma.org.my/api/kandungan`. Patut keluar `{"ok":true,...`.
+5. Masukkan `APPS_SCRIPT_URL` di Cloudflare (lihat di atas). Selepas menyimpan, Worker dihantar semula automatik.
+6. Uji: buka `arisma.org.my/api/kandungan`. Patut keluar `{"ok":true,...`.
 
-## Bila kutipan dalam talian dibuka (selepas toyyibPay disahkan)
-1. Cloudflare > Variables and secrets, tambah `TOYYIBPAY_BILLCODES` = kod bil Desa (pisah dengan koma jika lebih daripada satu).
-2. toyyibPay > bil > Callback URL = `https://arisma.org.my/api/toyyibpay`.
-3. Sheet, tab Tetapan: isi `pautan_toyyibpay`, kemudian tukar `buka_desa` kepada `ya`.
-4. Integriti: nombor dalam laman datang terus dari toyyibPay (Worker bertanya semula kepada toyyibPay), bukan daripada notis yang boleh dipalsukan.
-5. Belum ada semakan harian automatik. Rekod penderma di Sheet bergantung pada notis (callback) toyyibPay. Bar progress tidak terjejas kerana ia tidak bergantung pada rekod itu.
+### Jika Sheet lama masih ada tab/baris daripada versi sebelum ini
+Selepas `Code.gs` baharu ditampal dan di-deploy sebagai New version, bersihkan secara manual (tidak berbahaya jika dibiar, tetapi tidak lagi digunakan):
+- Padam tab **Penderma**.
+- Padam baris `sasaran_desa`, `kutipan_luar`, `buka_desa`, `pautan_toyyibpay` dalam tab Tetapan.
+- Apps Script > Project Settings > Script Properties: padam `KUNCI`.
+- Cloudflare > Variables and secrets: padam `KUNCI_SKRIP`, `TOYYIBPAY_BILLCODES`, `DESA_TAMBAHAN`, `CRON_SECRET` jika ada.
 
 ## Akaun dan akses (elakkan bergantung pada seorang)
 Simpan senarai ini dalam dokumen "00 BACA DULU" dan pastikan sekurang-kurangnya dua orang boleh mengakses setiap satu:
@@ -77,7 +80,9 @@ Simpan senarai ini dalam dokumen "00 BACA DULU" dan pastikan sekurang-kurangnya 
 - Cloudflare (hosting + DNS), emel: arismasales@gmail.com
 - GitHub (`arisma-my`)
 - Google Sheet "ARISMA Website" + Apps Script
-- toyyibPay (akaun Yayasan)
+- Google Search Console (`arisma.org.my`)
+
+Akaun sumbangan (CHIP) diurus di projek ARISMA Foundation, bukan di sini.
 
 ## Sebelum siar / semak berkala
 - Kebenaran keluarga untuk setiap gambar dan nama pelatih.
