@@ -23,6 +23,7 @@ Laman satu halaman untuk Akademi Remaja Islam Autisma. Entiti berasingan daripad
 - Jangan letak rahsia, kunci, token atau data peribadi dalam repo. Pembolehubah rahsia (`APPS_SCRIPT_URL`, `KUNCI_SKRIP`, dll.) ditetapkan di Cloudflare sahaja.
 - Fail yang TIDAK dihidang disenaraikan dalam `.assetsignore`. Fail dalaman baharu (nota, skrip) mesti ditambah di situ.
 - `wrangler.jsonc`: `workers_dev: false` dan `preview_urls: true` dipasangkan dengan sengaja. `preview_urls` mesti kekal `true` supaya PR boleh dipratonton. Jangan tukar ke `false` tanpa bertanya pengguna.
+- `wrangler.jsonc`: blok `"previews": {}` mesti kekal (walaupun kosong) kerana Workers Builds guna `wrangler preview` (beta) untuk branch bukan-main dan akan gagal tanpanya.
 - `_headers`: `/img/*` dicache 7 hari. **Bila ganti gambar, guna nama fail baharu**, jangan timpa nama lama.
 - HSTS: `max-age=31536000` sahaja. Jangan tambah `includeSubDomains` atau `preload` tanpa arahan pengguna (subdomain perlu disemak dahulu).
 - CSP sedang dalam mod `Report-Only`. Menukar kepada penguatkuasaan ialah PR berasingan, selepas amaran di konsol pelayar dibersihkan.

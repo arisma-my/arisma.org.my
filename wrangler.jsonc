@@ -7,6 +7,9 @@
   // MESTI ditulis eksplisit: jika tidak, nilainya mengikut workers_dev (false)
   // dan pratonton PR turut mati. Jangan tukar ke false tanpa tanya.
   "preview_urls": true,
+  // Workers Builds guna `wrangler preview` (beta) untuk branch bukan-main dan
+  // mewajibkan blok ini wujud. Biarkan kosong.
+  "previews": {},
   "assets": {
     "directory": "./",
     "binding": "ASSETS",
